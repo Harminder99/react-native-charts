@@ -1,8 +1,9 @@
+import { BaseChartConfig, HorizontalBarGraphConfig, LabelsData, VerticalBarGraphConfig } from '../../types'
+import { G, Rect, Svg } from 'react-native-svg'
+
+import ChartBuilder from '@chartiful/react-native-chart-builder'
 import React from 'react'
 import { View } from 'react-native'
-import { Svg, Rect, G } from 'react-native-svg'
-import ChartBuilder from '@chartiful/react-native-chart-builder'
-import { VerticalBarGraphConfig, BaseChartConfig } from '../../types'
 
 const HorizontalBarGraph = ({
   data,
@@ -18,7 +19,7 @@ const HorizontalBarGraph = ({
     height: width,
     width: height
   }
-}: VerticalBarGraphConfig) => {
+}: HorizontalBarGraphConfig) => {
   const translateProps = () => {
     let baseConfigCopy: BaseChartConfig = JSON.parse(JSON.stringify(baseConfig))
 
@@ -78,8 +79,8 @@ const HorizontalBarGraph = ({
   const slotGap: number = chartBuilder.yLabelSlotWidth * (1 - barWidthPercentage)
 
   const renderBars = () => {
-    return data.map((val: number, i: number) => {
-      const barHeight: number = chartBuilder.calcDataPointHeight(val)
+    return data.map((val: LabelsData, i: number) => {
+      const barHeight: number = chartBuilder.calcDataPointHeight(val.value)
 
       return (
         <Rect
@@ -89,7 +90,7 @@ const HorizontalBarGraph = ({
           rx={barRadius}
           width={barWidth}
           height={barHeight < 0 ? 0 : barHeight}
-          fill={barColor}
+          fill={val?.barColor ?? barColor}
         />
       )
     })

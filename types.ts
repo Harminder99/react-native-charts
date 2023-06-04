@@ -55,7 +55,7 @@ export interface BaseChartConfig {
 }
 
 export interface HorizontalBarGraphConfig {
-  data: number[]
+  data: LabelsData[]
   labels?: string[]
   height: number
   width: number
@@ -64,6 +64,11 @@ export interface HorizontalBarGraphConfig {
   barColor?: string
   style?: any
   baseConfig?: BaseChartConfig
+}
+
+export interface LabelsData {
+  value : string;
+  barColor?: string;
 }
 
 export interface VerticalBarGraphConfig {
